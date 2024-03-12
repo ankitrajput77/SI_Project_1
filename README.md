@@ -1,1 +1,1 @@
-# SI_Project_1
+# Statistical Inference Project 1
