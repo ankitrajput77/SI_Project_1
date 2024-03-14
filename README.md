@@ -79,7 +79,7 @@ here we can clearly see that the above equation is not solvable analytically, so
 ```
 where $\alpha$ is the learning rate.
 
-5. Repeat steps 2 and 3 until the value of $\theta$ converges.
+4. Repeat steps 2 and 3 until the value of $\theta$ converges.
 
 
 We will use the following values for the parameters:
@@ -87,7 +87,6 @@ We will use the following values for the parameters:
 2. Learning rate: 0.001
 We will use the following stopping criteria:
 1. 1000 iterations
-2. 
 since our problem is of maximization, we can convert it into a minimization problem by multiplying it by -1. we also have one constant term in the equation (1) i.e 53ln2. which can be discarded because it won't affect the optimum solution. So our final equation for minimization is:
 
 ```math
