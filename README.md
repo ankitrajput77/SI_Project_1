@@ -26,6 +26,10 @@ Now we can define the likelihood function as follows:
         & L(\theta)=\left(\frac{2}{\theta}\right)^{53}\prod_{i=1}^{53}\left(1-e^{-\frac{x_i}{\theta}}\right)e^{-\frac{x_i}{\theta}}\\
         & ln(L(\theta))=53ln\left(\frac{2}{\theta}\right)+\sum_{i=1}^{53}ln\left(1-e^{-\frac{x_i}{\theta}}\right)-\sum_{i=1}^{53}\frac{x_i}{\theta}\\
         &\tag{1} ln(L(\theta))=53ln(2)-53ln(\theta)+\sum_{i=1}^{53}ln\left(1-e^{-\frac{x_i}{\theta}}\right)-\sum_{i=1}^{53}\frac{x_i}{\theta}\\
+    \end{align*}
+```
+```math
+    \begin{align*}
         &\text{Now we can differentiate the log likelihood function to find the MLE:}\\
         & \frac{d}{d\theta}ln(L(\theta))=0\\
         & \frac{d}{d\theta}\left(53ln(2)-53ln(\theta)+\sum_{i=1}^{53}ln\left(1-e^{-\frac{x_i}{\theta}}\right)-\sum_{i=1}^{53}\frac{x_i}{\theta}\right)=0\\
@@ -47,6 +51,10 @@ Now we can define the likelihood function as follows:
         &\text{we have done it upto 1000 iterations}\\
         &\text{since our problem is maximization, we can convert it into a minimization problem by multiplying it by -1}\\
         &\text{and we also have one constant term in the equation (1) i.e 53ln2. We can discard this term because it won't affect the optimum solution. So our final equation for minimization is: }\\
+    \end{align*}
+```
+```math
+    \begin{align*}
         &\tag{2} -ln(L(\theta))=-\sum_{i=1}^{53}ln\left(1-e^{-\frac{x_i}{\theta}}\right)+\sum_{i=1}^{53}\frac{x_i}{\theta}+53ln(\theta)\\
         &\text{gradient of the function is:}\\
         &\frac{d}{d\theta}ln(L(\theta))=\sum_{i=1}^{53}\frac{e^{-\frac{x_i}{\theta}}x_i}{\theta^2(1-e^{-\frac{x_i}{\theta}})}-\sum_{i=1}^{53}\frac{x_i}{\theta^2}+\frac{53}{\theta}\\
