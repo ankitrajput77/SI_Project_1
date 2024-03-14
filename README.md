@@ -18,12 +18,36 @@ in the given data set DataP1Q2.csv, we have 53 data points and we want to estima
         & f(x|\theta)=\frac{2}{\theta}\left(1-e^{-\frac{x}{\theta}}\right)e^{-\frac{x}{\theta}}\\
     \end{align*}
 ```
+Hence the probability density function is given by:
+
+```math
+    \begin{align*}
+        &f(x|\theta) = \begin{cases} 
+          \frac{2}{\theta}\left(1-e^{-\frac{x}{\theta}}\right)e^{-\frac{x}{\theta}} & x\geq 0 \\
+          0 & otherwise 
+       \end{cases}
+    \end{align*}
+```
 Now we can define the likelihood function as follows:
 ```math
     \begin{align*}
         & L(\theta)=\prod_{i=1}^{53}f(x_i|\theta)\\
         & L(\theta)=\prod_{i=1}^{53}\frac{2}{\theta}\left(1-e^{-\frac{x_i}{\theta}}\right)e^{-\frac{x_i}{\theta}}\\
         & L(\theta)=\left(\frac{2}{\theta}\right)^{53}\prod_{i=1}^{53}\left(1-e^{-\frac{x_i}{\theta}}\right)e^{-\frac{x_i}{\theta}}\\
+    \end{align*}
+```
+Likelihood function is given by:
+```math
+    \begin{align*}
+        &L(\theta)= \begin{cases}
+            L(\theta)=\left(\frac{2}{\theta}\right)^{53}\prod_{i=1}^{53}\left(1-e^{-\frac{x_i}{\theta}}\right)e^{-\frac{x_i}{\theta}} \geq 0 \\
+    0 & otherwise
+    \end{cases}
+    \end{align*}
+```
+Taking log likelihood to make it more suitable to find MLE:
+```math
+    \begin{align*}
         & ln(L(\theta))=53ln\left(\frac{2}{\theta}\right)+\sum_{i=1}^{53}ln\left(1-e^{-\frac{x_i}{\theta}}\right)-\sum_{i=1}^{53}\frac{x_i}{\theta}\\
         &\tag{1} ln(L(\theta))=53ln(2)-53ln(\theta)+\sum_{i=1}^{53}ln\left(1-e^{-\frac{x_i}{\theta}}\right)-\sum_{i=1}^{53}\frac{x_i}{\theta}\\
     \end{align*}
