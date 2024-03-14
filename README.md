@@ -50,7 +50,7 @@ Now we can define the likelihood function as follows:
         &\text{We will use the following stopping criteria:}\\
         &\text{we have done it upto 1000 iterations}\\
         &\text{since our problem is maximization, we can convert it into a minimization problem by multiplying it by -1}\\
-        &\text{and we also have one constant term in the equation (1) i.e 53ln2.}
+        &\text{and we also have one constant term in the equation (1) i.e 53ln2.}\\
         &\text{ We can discard this term because it won't affect the optimum solution. So our final equation for minimization is: }\\
     \end{align*}
 ```
