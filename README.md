@@ -93,7 +93,7 @@ since our problem is of maximization, we can convert it into a minimization prob
 ```math
     \begin{align*}
         &\tag{2} -ln(L(\theta))=-\sum_{i=1}^{53}ln\left(1-e^{-\frac{x_i}{\theta}}\right)+\sum_{i=1}^{53}\frac{x_i}{\theta}+53ln(\theta)\\
-        &\frac{d}{d\theta}ln(-L(\theta))=\frac{1}{\theta^2}\left({53\theta}-\sum_{i=1}^{53}\frac{e^{-\frac{x_i}{\theta}}x_i}{(1-e^{-\frac{x_i}{\theta}})}-\sum_{i=1}^{53}{x_i}\right)\\
+        &\frac{d}{d\theta}ln(-L(\theta))=\frac{1}{\theta^2}\left({53\theta}+\sum_{i=1}^{53}\frac{e^{-\frac{x_i}{\theta}}x_i}{(1-e^{-\frac{x_i}{\theta}})}-\sum_{i=1}^{53}{x_i}\right)\\
     \end{align*}
 ```
 using the above equation with specified parameters, we have found that the MLE is converging to 0.5 as we can see in the below graph:
