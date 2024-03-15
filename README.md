@@ -91,9 +91,10 @@ To verify this estimator we use technology to integrate xf(x) which is approxima
 
 Again using the same seed that we used in part(b) ```42``` .
 This time we are generating 10,000 with same procedure.
-Using the graph we can see that histogram of generated random number is following the same distribution of the given pdf. which is obvious and also this verifing our
+Using the graph we can see that histogram of generated random number is following the same distribution of the given pdf. which is obvious and also this verifing our algorithm.
 
-![alt text](Figure_1.png)
+![Figure_1](https://github.com/ankitrajput77/SI_Project_1/assets/113281225/10be9ab6-6779-4c60-8473-df2aee81b6f8)
+
 
 ## Question 2(a)
 
