@@ -261,3 +261,134 @@ by performing this experiment we the following results $\rightarrow$
 1. $\theta$=0.5, mse=0.0011625406930615128, bias=-0.004914924669973003
 2. $\theta$=1, mse=0.0046501627722460625, bias=-0.00982984933994567
 3. $\theta$=2, mse=0.01860065108898442, bias=-0.019659698679888572
+
+
+## Question no. 3
+
+Given probability density function
+
+```math
+\begin{align*}
+        &  & f(x;{\mu},{\sigma^2})=\begin{cases}
+            \frac{1}{x\sigma \sqrt{2\pi}}e^{\frac{-1}{2\sigma^2}(lnx-\mu)^2} & x\geq 0\\
+            0 & otherwise\\
+            \end{cases}\\
+    \end{align*}
+```
+
+Therefore Cumulative distributive function is given by
+
+```math
+\begin{align*}
+        & F(x;{\mu},{\sigma^2})= \int_{0}^{\infty}
+            \frac{1}{x\sigma \sqrt{2\pi}}e^{\frac{-1}{2\sigma^2}(lnx-\mu)^2}dx\\
+        & \text{Putting y = lnx}\\
+        & {dy = \frac{1}{x}dx } \\
+        & F(y;{\mu},{\sigma^2})= \int_{0}^{\infty}
+            \frac{1}{\sigma \sqrt{2\pi}}e^{\frac{-1}{2\sigma^2}(y-\mu)^2}
+    \end{align*}
+```
+
+So CDF is given by
+
+```math
+\begin{align*}
+        & F(y;{\mu},{\sigma^2})= \begin{cases}\int_{0}^{\infty}
+            \frac{1}{\sigma \sqrt{2\pi}}e^{\frac{-1}{2\sigma^2}(y-\mu)^2} & x\geq 0\\
+            0 & otherwise\\
+            \end{cases}\\
+    \end{align*}
+```
+
+This function looks like a normal distribution in which $\mu$ and $\sigma$ are known.
+The likelihood function is given by
+
+```math
+    \begin{align*}
+        & L(\theta)=\prod_{i=1}^{20}\frac{1}{\sigma \sqrt{2\pi}}e^{\frac{-1}{2\sigma^2}(y_{i}-\mu)^2} \\
+       & L(\theta)=(\frac{1}{\sigma \sqrt{2\pi}})^n e^{\frac{-1}{2\sigma^2}\sum_{i=1}^{n}(y_{i}-\mu)^2} 
+    \end{align*}
+```
+
+Now the Likelihood ratio  is given by;
+
+```math
+    \begin{align*}
+        & \frac{L(\mu_1)}{L(\mu_0)}=\frac{\prod_{i=1}^{20}\frac{1}{\sigma \sqrt{2\pi}}e^{\frac{-1}{2\sigma^2}(y_{i}-\mu)^2}}{\prod_{i=1}^{20}\frac{1}{\sigma \sqrt{2\pi}}e^{\frac{-1}{2\sigma^2}(y_{i}-\mu)^2}} \\
+
+        & \frac{L(\mu_1)}{L(\mu_0)}= e^{\frac{-1}{2\sigma^2}\sum_{i=1}^{20}(y_{i}-\mu_1)^2 - (y_{i}-\mu_0)^2}\\
+
+        & \frac{L(\mu_1)}{L(\mu_0)}=e^{\frac{-1}{2\sigma^2}(-2\mu_1n\bar{x} + n\mu_1^2 + 2\mu_0n\bar{x}-n\mu_0^2)}
+    \end{align*}
+```
+
+Now
+
+```math
+    \begin{align*}
+        & \frac{L(\mu_1)}{L(\mu_0)}>k \\
+        & e^{\frac{-1}{2\sigma^2}(-2\mu_1n\bar{x} + n\mu_1^2 + 2\mu_0n\bar{x}-n\mu_0^2)} >k\\
+        & \frac{-1}{2\sigma^2}(2n\bar{x}(\mu_0-\mu_1) + n(\mu_1^2-\mu_0^2))=k_1\\
+        &2n\bar{x}(\mu_0-\mu_1)>k_2
+        \bar{x}>k_3
+
+    \end{align*}
+```
+
+The MP level $\alpha$  test is given by
+
+```math
+    \begin{align*}
+        & \psi(x)=\begin{cases}
+             1 & \bar{x}> k_3\\
+            \gamma & \bar{x}= k_3 \\
+            0 & \bar{x}< k_3
+            \end{cases}\\
+    \end{align*}
+```
+
+Now $\gamma$ and $k_3$ are such that $E_{\mu=\mu_0}(\phi(x))=\alpha$
+
+```math
+    \begin{align*}
+        & E_{\mu=\mu_0}(\psi(x))=\alpha\\
+        & P_{\mu=\mu_0}(\bar{X}>k_3) + \gamma P_{\mu=\mu_0}(\bar{X}=k_3)=\alpha \\
+        & P_{\mu=\mu_0}(\frac{\sqrt n(\bar{X}-\mu_0)}{\sigma} > \frac{\sqrt(n)(k_3-\mu_0)}{\sigma}) =\alpha\\
+        &\frac{\sqrt n(k_3-\mu_0)}{\sigma}=z_{\alpha/2}\\
+        &k_3= \frac{z_{\alpha/2}\sigma}{\sqrt n}+\mu_0
+    \end{align*}
+```
+
+Therefore
+
+```math
+    \begin{align*}
+        & \psi(x)=\begin{cases}
+             1 & \frac{\sqrt n(\bar{x}-\mu_0)}{\sigma}>z_{\alpha/2}\\
+            0 & otherwise
+            \end{cases}\\
+    \end{align*}
+```
+
+Given $\mu_0= 15$ and $\sigma= 13$ so putting values in above function so
+
+```math
+    \begin{align*}
+        & \psi(x)=\begin{cases}
+             1 & \frac{\sqrt 20(\bar{x}-15)}{13}>z_\alpha\\
+            0 & otherwise
+            \end{cases}\\
+    \end{align*}
+```
+
+From the given data set $\bar{x}=13.435$ and choosing $\alpha = 0.05$ 
+
+```math
+    \begin{align*}
+        & \psi(x)=\begin{cases}
+             1 & \frac{\sqrt 20(13.435-15)}{13}>z_{0.025}\\
+            0 & otherwise
+            \end{cases}\\
+    \end{align*}
+```
+
