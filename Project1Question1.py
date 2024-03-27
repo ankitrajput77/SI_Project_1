@@ -68,15 +68,18 @@ plt.show()
 def cdf(x):
     return 1 - np.exp(-x**2 - x)
 
-# using random number generated from part (c)
-# sorting them to find emperical function
-X_sorted = np.sort(X)
+# defining empirical function
+def emp_fun(X, x):
+    X_sorted = np.sort(X)
+    n = len(X)
+    k_values = []
+    for val in x:
+        k = np.sum(X_sorted < val)
+        k_values.append(k)
+    return np.array(k_values) / n
 
-# Calculate the empirical distribution function (EDF)
-edf = np.arange(1, len(X_sorted) + 1) / len(X_sorted)
-
-# Plotting the empirical distribution function
-plt.plot(X_sorted, edf, marker='.', linestyle='-', color='blue', label='Empirical Distribution Function')
+# Plotting the empirical function 
+plt.plot(np.linspace(0, 3, 3000), emp_fun(X, np.linspace(0, 3, 3000)), marker='.', linestyle='-', color='blue', label='Empirical Distribution Function')
 
 # Plotting the function 1 - e^(-x^2 - x)
 plt.plot(np.linspace(0, 3, 3000), cdf(np.linspace(0, 3, 3000)), color='red', label='$1 - e^{-x^2 - x}$')
@@ -88,8 +91,3 @@ plt.ylabel('Probability')
 plt.legend()
 plt.grid(True)
 plt.show()
-
-
-
-
-
