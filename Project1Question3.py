@@ -11,6 +11,17 @@ def conversion_to_normal(X):
     return np.log(X)
 
 
+def generate_normal_random_numbers(mu, sigma, nums):
+    u1 = np.random.rand(nums)
+    u2 = np.random.rand(nums)
+    # Box-Muller transform
+    z1 = np.sqrt(-2 * np.log(u1)) * np.cos(2 * np.pi * u2)
+    z2 = np.sqrt(-2 * np.log(u1)) * np.sin(2 * np.pi * u2)
+    # Scale and shift to get desired mean and standard deviation
+    z1 = z1 * sigma + mu
+    return z1
+
+
 
 # test function
 def test_function(X):
@@ -21,22 +32,20 @@ def test_function(X):
     n = 100000 
     statistic_values = []
     for i in range(n):
-        np.random.seed(i)
         sigma_0 = 13
         mu_0 = 15
-        x = np.random.normal(mu_0, sigma_0, 20)
+        x = generate_normal_random_numbers(mu_0, sigma_0, 20)
         n = len(x)
         sigma_1 = x.std()
-        y = np.exp(-np.sum((x-mu_0)**2)/(2*(sigma_0**2)) + n/2)*(sigma_1/sigma_0)**n
+        y = np.exp(-np.sum((x-mu_0)**2)/(2*(sigma_0**2)))*(sigma_1)**n
         statistic_values.append(y)
 
     res = np.sort(statistic_values)
     k = res[round(n*(0.05))]
-    if np.exp(-np.sum((X-mu_0)**2)/(2*(13**2)) + n/2)*(sigma_1/sigma_0)**n < k:
+    if np.exp(-np.sum((X-mu_0)**2)/(2*(sigma_0**2)))*(sigma_1)**n < k:
         return "Reject the Null hypothesis"
     else:
         return "Accept the Null hypothesis"
-
 
 
 
@@ -48,9 +57,3 @@ if __name__=='__main__':
     X=np.loadtxt('./DataP1Q3.csv', delimiter=',', skiprows=1)
     Y = conversion_to_normal(X)
     print(test_function(Y))
-
-
-
-    
-
-
