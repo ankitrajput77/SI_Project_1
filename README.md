@@ -1,5 +1,6 @@
 # Statistical Inference Project 1
 
+
 ## Question 1(a)
 
 - Aim:- Device an algorithm using inverse transformation technique to generate random number from the above probability density function.
@@ -93,8 +94,36 @@ Again using the same seed that we used in part(b) ```42``` .
 This time we are generating 10,000 with same procedure.
 Using the graph we can see that histogram of generated random number is following the same distribution of the given pdf. which is obvious and also this verifing our algorithm.
 
-![Figure_1](https://github.com/ankitrajput77/SI_Project_1/assets/113281225/10be9ab6-6779-4c60-8473-df2aee81b6f8)
+![C:\Users\Ankit\Downloads\NIHMS757573-supplement-Supp_Code\Figure_3.png](Figure_3.png)
 
+## Question 1(d)
+For the given random sample $(x_1, x_2,...x_n)$ expirical function is defined as the discrete distribution that assigns to every value $X_k$ the probability $\frac{1}{n}$.
+Hence Empirical function:
+```math
+    \begin{align*}
+        & F_n(x)=\begin{cases}
+            0 & x<x_1\\
+            \frac{k}{n} & x_{k} <x\leq x_{k+1}, \quad 1 \leq k \leq n-1\\
+            1 &  x > x_n\\
+            \end{cases}\\
+    \end{align*}
+```
+
+And given CDF:
+
+```math
+    \begin{align*}
+        & F(x)=\begin{cases}
+            \left(1-e^{-\frac{x}{\theta}}\right)^2 & x> 0\\
+            0 & x\leq0\\
+            \end{cases}\\
+    \end{align*}
+```
+Ploting these functions on same graph:
+![C:\Users\Ankit\Downloads\NIHMS757573-supplement-Supp_Code\Figure_4.png](Figure_4.png)
+
+We can clearly see that both of these functions have same curve, which can be seen as:
+$F_n(x)\rightarrow F(x), \quad when \quad x \rightarrow \infty $
 
 ## Question 2(a)
 
@@ -207,7 +236,7 @@ since our problem is of maximization, we can convert it into a minimization prob
 ```
 
 using the above equation with specified parameters, we have found that the MLE is converging to 0.5 as we can see in the below graph:
-![alt text](image-1.png)
+![alt text](Figure_1.png)
 
 ## Question 2(b)
 
@@ -284,23 +313,25 @@ Therefore Cumulative distributive function is given by
             \frac{1}{x\sigma \sqrt{2\pi}}e^{\frac{-1}{2\sigma^2}(lnx-\mu)^2}dx\\
         & \text{Putting y = lnx}\\
         & {dy = \frac{1}{x}dx } \\
-        & F(y;{\mu},{\sigma^2})= \int_{0}^{\infty}
+        & F(y;{\mu},{\sigma^2})= \int_{-\infty}^{\infty}
             \frac{1}{\sigma \sqrt{2\pi}}e^{\frac{-1}{2\sigma^2}(y-\mu)^2}
     \end{align*}
 ```
 
-So CDF is given by
 
-```math
-\begin{align*}
-        & F(y;{\mu},{\sigma^2})= \begin{cases}\int_{0}^{\infty}
-            \frac{1}{\sigma \sqrt{2\pi}}e^{\frac{-1}{2\sigma^2}(y-\mu)^2} & x\geq 0\\
-            0 & otherwise\\
-            \end{cases}\\
-    \end{align*}
-```
+This function looks like a normal distribution with $\mu$ and $\sigma$ as expectation and standard deviation.
 
-This function looks like a normal distribution in which $\mu$ and $\sigma$ are known.
+Hence we can say that:
+
+If X follows given probability distribution function then Y follows normal distribution function with $(\mu, \sigma^2)$ where $Y = ln(x)$
+
+Hypothesis to test:
+
+$H_0: (\mu, \sigma) = (\mu_0, \sigma_0)$
+$H_1: (\mu, \sigma) \ne (\mu_0, \sigma_0)$
+
+Our aim is to find test function which we acieve using the likelihood ratio test.
+
 The likelihood function is given by
 
 ```math
@@ -309,86 +340,67 @@ The likelihood function is given by
        & L(\theta)=(\frac{1}{\sigma \sqrt{2\pi}})^n e^{\frac{-1}{2\sigma^2}\sum_{i=1}^{n}(y_{i}-\mu)^2} 
     \end{align*}
 ```
+Now Ramdom sample ```(Y_1, Y_2,...Y_n)```
+
+Let $\mu_1$ and $\sigma_1$ are MLE for $\mu$ and $\sigma$.
 
 Now the Likelihood ratio  is given by;
 
 ```math
     \begin{align*}
-        & \frac{L(\mu_1)}{L(\mu_0)}=\frac{\prod_{i=1}^{20}\frac{1}{\sigma \sqrt{2\pi}}e^{\frac{-1}{2\sigma^2}(y_{i}-\mu)^2}}{\prod_{i=1}^{20}\frac{1}{\sigma \sqrt{2\pi}}e^{\frac{-1}{2\sigma^2}(y_{i}-\mu)^2}} \\
+        & \frac{Sup_{\theta \in \Theta_0}L(\theta)}{Sup_{\theta \in \Theta_0 \cup \Theta_1}L(\theta)}=\frac{\prod_{i=1}^{n}\frac{1}{\sigma_0 \sqrt{2\pi}}e^{\frac{-1}{2\sigma_0^2}(y_{i}-\mu_0)^2}}{\prod_{i=1}^{n}\frac{1}{\sigma_1 \sqrt{2\pi}}e^{\frac{-1}{2\sigma_1^2}(y_{i}-\mu_1)^2}} \\
 
-        & \frac{L(\mu_1)}{L(\mu_0)}= e^{\frac{-1}{2\sigma^2}\sum_{i=1}^{20}(y_{i}-\mu_1)^2 - (y_{i}-\mu_0)^2}\\
+        & = (\frac{\sigma_1}{\sigma_0})^n e^{-\frac{1}{2\sigma_0^2}\sum_{i=1}^n(y_i-\mu_0)^2+\frac{1}{2\sigma_1^2}\sum_{i=1}^n(y_i-\mu_1)^2}\\
 
-        & \frac{L(\mu_1)}{L(\mu_0)}=e^{\frac{-1}{2\sigma^2}(-2\mu_1n\bar{x} + n\mu_1^2 + 2\mu_0n\bar{x}-n\mu_0^2)}
     \end{align*}
 ```
 
-Now
+Now as $\sigma_1^2 = \frac{\sum_{i=1}^n(y_i-\bar{y})^2}{n}, \mu_1 =\bar{y}$ 
 
 ```math
     \begin{align*}
-        & \frac{L(\mu_1)}{L(\mu_0)}>k \\
-        & e^{\frac{-1}{2\sigma^2}(-2\mu_1n\bar{x} + n\mu_1^2 + 2\mu_0n\bar{x}-n\mu_0^2)} >k\\
-        & \frac{-1}{2\sigma^2}(2n\bar{x}(\mu_0-\mu_1) + n(\mu_1^2-\mu_0^2))=k_1\\
-        &2n\bar{x}(\mu_0-\mu_1)>k_2
-        \bar{x}>k_3
-
+        & (\frac{\sigma_1}{\sigma_0})^n e^{-\frac{1}{2\sigma_0^2}\sum_{i=1}^n(y_i-\mu_0)^2+\frac{1}{2\sigma_1^2}\sum_{i=1}^n(y_i-\mu_1)^2} < k_1\\
+        & \Leftrightarrow (\frac{\sigma_1}{\sigma_0})^n e^{-\frac{1}{2\sigma_0^2}\sum_{i=1}^n(y_i-\mu_0)^2+\frac{n}{2}} < k_1\\
+        & \Leftrightarrow (\sigma_1)^n e^{-\frac{1}{2\sigma_0^2}\sum_{i=1}^n(y_i-\mu_0)^2} < k\\
     \end{align*}
 ```
+Now more simplification may be not possible theoritically, we use monte carlo to solve further.
 
 The MP level $\alpha$  test is given by
 
 ```math
     \begin{align*}
         & \psi(x)=\begin{cases}
-             1 & \bar{x}> k_3\\
-            \gamma & \bar{x}= k_3 \\
-            0 & \bar{x}< k_3
+             1 & (\sigma_1)^n e^{-\frac{1}{2\sigma_0^2}\sum_{i=1}^n(y_i-\mu_0)^2} < k\\
+            
+            0 & o.w
             \end{cases}\\
     \end{align*}
 ```
 
-Now $\gamma$ and $k_3$ are such that $E_{\mu=\mu_0}(\phi(x))=\alpha$
+Now $k$ is such that $E_{(\mu,\sigma=\mu_0, \sigma_0)}(\psi(x))=\alpha$
 
 ```math
     \begin{align*}
-        & E_{\mu=\mu_0}(\psi(x))=\alpha\\
-        & P_{\mu=\mu_0}(\bar{X}>k_3) + \gamma P_{\mu=\mu_0}(\bar{X}=k_3)=\alpha \\
-        & P_{\mu=\mu_0}(\frac{\sqrt n(\bar{X}-\mu_0)}{\sigma} > \frac{\sqrt(n)(k_3-\mu_0)}{\sigma}) =\alpha\\
-        &\frac{\sqrt n(k_3-\mu_0)}{\sigma}=z_{\alpha/2}\\
-        &k_3= \frac{z_{\alpha/2}\sigma}{\sqrt n}+\mu_0
+        & P_{\mu,\sigma =\mu_0, \sigma_0}((\sigma_1)^n e^{-\frac{1}{2\sigma_0^2}\sum_{i=1}^n(y_i-\mu_0)^2}<k)  =\alpha \\
+
+        
     \end{align*}
 ```
 
-Therefore
+To find the distribution of LHS is quite hard.
+Therefore do the following steps to find the value of k.
 
-```math
-    \begin{align*}
-        & \psi(x)=\begin{cases}
-             1 & \frac{\sqrt n(\bar{x}-\mu_0)}{\sigma}>z_{\alpha/2}\\
-            0 & otherwise
-            \end{cases}\\
-    \end{align*}
-```
+1. Generate 100000 random samples from Normal distribution with $\mu_0$ and $\sigma_0$.
+2. Pass this random samples to get the random numbers from LHS's distribution.
+3. After getting this 100000 statistic values, we sort it into increasing terms.
+4. Now we set k equal to random number that is the index $\lfloor{10000\alpha} \rfloor$. which gives us the value for which only $\alpha \cdot 100 %$  random numbers are less than k ($P(\Lambda(y) < k) = \alpha$).
 
-Given $\mu_0= 15$ and $\sigma= 13$ so putting values in above function so
+To test given data, whether to reject or accept the null hypothesis.
 
-```math
-    \begin{align*}
-        & \psi(x)=\begin{cases}
-             1 & \frac{\sqrt 20(\bar{x}-15)}{13}>z_\alpha\\
-            0 & otherwise
-            \end{cases}\\
-    \end{align*}
-```
+check whether:
 
-From the given data set $\bar{x}=13.435$ and choosing $\alpha = 0.05$ 
+$(\sigma_1)^n e^{-\frac{1}{2\sigma_0^2}\sum_{i=1}^n(y_i-\mu_0)^2} < k$ 
+where ```y_i``` are data points.
 
-```math
-    \begin{align*}
-        & \psi(x)=\begin{cases}
-             1 & \frac{\sqrt 20(13.435-15)}{13}>z_{0.025}\\
-            0 & otherwise
-            \end{cases}\\
-    \end{align*}
-```
-
+In this case we **Accept Our Null Hypothesis**.
